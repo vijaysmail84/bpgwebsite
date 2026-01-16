@@ -1,0 +1,86 @@
+{
+  "collegeName": "Amer Maharaja P.G. College",
+  "address": "NH-11 Highway, Kunda, Amer, Jaipur, Rajasthan 302028",
+  "email": "info@amermaharajacollege.com",
+  "phone": "+91 8448-450046 | +91 98875 43410",
+  "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.464670412808!2d75.8856!3d26.9935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU5JzM2LjYiTiA3NcKwNTMnMDguMiJF!5e0!3m2!1sen!2sin!4v1641000000000",
+  "theme": {
+    "primary": "#002D62",
+    "secondary": "#D4AF37",
+    "tickerBg": "#E31837"
+  },
+  "navigation": [
+    { "name": "Home", "url": "index.html" },
+    {
+      "name": "About",
+      "url": "#",
+      "children": [
+        { "name": "Vision & Mission", "url": "content.html?id=vision" },
+        { "name": "Director's Message", "url": "content.html?id=director" },
+        { "name": "Principal's Message", "url": "content.html?id=principal" }
+      ]
+    },
+    {
+      "name": "Governance",
+      "url": "#",
+      "children": [
+        { "name": "Governing Body", "url": "#" },
+        { "name": "Staff Council", "url": "#" },
+        { "name": "Staff Association", "url": "#" }
+      ]
+    },
+    {
+      "name": "Academics",
+      "url": "#",
+      "children": [
+        { "name": "Departments", "url": "#" },
+        { "name": "Academic Calendar", "url": "#" }
+      ]
+    },
+    {
+      "name": "Courses",
+      "url": "#",
+      "children": [
+        { "name": "UG Programe", "url": "#" },
+        { "name": "PG Programe", "url": "#" }
+      ]
+    },
+    {
+      "name": "IQAC",
+      "url": "#",
+      "children": [
+        { "name": "Objectives & Functions", "url": "#" },
+        { "name": "Composition", "url": "#" },
+        { "name": "Audit", "url": "#" },
+        { "name": "Reports", "url": "#" }
+      ]
+    },
+    {
+      "name": "Alumni",
+      "url": "#"
+    },
+    {
+      "name": "Events",
+      "url": "#"
+    },
+    {
+      "name": "Department",
+      "url": "#",
+      "children": [
+        { "name": "Arts", "url": "content.html?id=arts" },
+        { "name": "Science", "url": "content.html?id=science" },
+        { "name": "Commerce", "url": "content.html?id=commerce" }
+      ]
+    },
+    {
+      "name": "Infrastructure",
+      "url": "#",
+      "children": [
+        { "name": "Sports", "url": "content.html?id=sports" },
+        { "name": "Library", "url": "content.html?id=library" },
+        { "name": "Labs", "url": "content.html?id=labs" }
+      ]
+    },
+    { "name": "Contact", "url": "content.html?id=contact" }
+  ]
+}
