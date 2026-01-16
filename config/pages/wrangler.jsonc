@@ -2,6 +2,9 @@
   "name": "royal-haze-449f",
   "compatibility_date": "2026-01-16",
   "assets": {
-    "directory": "./"
+    "directory": "."
+  },
+  "observability": {
+    "enabled": true
   }
 }
