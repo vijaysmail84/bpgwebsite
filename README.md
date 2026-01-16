@@ -1,1 +1,1 @@
-Amer Maharaja Website
+Bansur P.G. College Website
