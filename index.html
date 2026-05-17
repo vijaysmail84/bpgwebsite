@@ -1020,20 +1020,31 @@
 
       async function init() {
         try {
+          const safeFetch = (url, fallback) =>
+            fetch(url)
+              .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+              .catch(e => { console.warn('Failed to load ' + url + ':', e); return fallback; });
+
           const [settings, social, notices, links] = await Promise.all([
-            fetch('config/settings.json').then(r => r.json()),
-            fetch('config/social.json').then(r => r.json()),
-            fetch('config/notices.json').then(r => r.json()),
-            fetch('config/links.json').then(r => r.json()),
+            safeFetch('config/settings.json', null),
+            safeFetch('config/social.json', {}),
+            safeFetch('config/notices.json', []),
+            safeFetch('config/links.json', []),
           ]);
+
+          if (!settings) { console.error('Critical config missing – aborting init'); return; }
+
+          // Wait for footer.html to be injected before touching its elements
+          if (window.footerReady) await window.footerReady;
 
           // ── Branding & Theme ──
           document.getElementById('college-name').textContent = settings.collegeName;
-          document.getElementById('footer-name').textContent = settings.collegeName;
-          document.getElementById('footer-addr').textContent = settings.address;
-          document.getElementById('footer-contact').textContent = settings.phone;
-          document.getElementById('footer-email').textContent = settings.email;
-          document.getElementById('footer-map-iframe').src = settings.mapEmbed;
+          const setEl = (id, prop, val) => { const el = document.getElementById(id); if (el) el[prop] = val; };
+          setEl('footer-name', 'textContent', settings.collegeName);
+          setEl('footer-addr', 'textContent', settings.address);
+          setEl('footer-contact', 'textContent', settings.phone);
+          setEl('footer-email', 'textContent', settings.email);
+          setEl('footer-map-iframe', 'src', settings.mapEmbed);
           document.getElementById('dynamic-theme').textContent =
             `:root { --primary: ${settings.theme.primary}; --secondary: ${settings.theme.secondary}; }`;
 
@@ -1077,7 +1088,7 @@
           };
           const topBarIds = { facebook: 'social-fb', instagram: 'social-ig', youtube: 'social-yt' };
           const socialContainer = document.getElementById('social-icons');
-          Object.keys(social).forEach(k => {
+          if (socialContainer) Object.keys(social).forEach(k => {
             if (!social[k]) return;
             const a = document.createElement('a');
             a.href = social[k];

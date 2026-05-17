@@ -752,10 +752,17 @@
         const pageId = params.get("id") || "vision";
 
         try {
+          const safeFetch = (url, fallback) =>
+            fetch(url)
+              .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+              .catch(e => { console.warn('Failed to load ' + url + ':', e); return fallback; });
+
           const [settings, social] = await Promise.all([
-            fetch("config/settings.json").then((r) => r.json()),
-            fetch("config/social.json").then((r) => r.json()),
+            safeFetch("config/settings.json", null),
+            safeFetch("config/social.json", {}),
           ]);
+
+          if (!settings) { console.error('Critical config missing – aborting init'); return; }
 
           // Theme & branding
           document.getElementById("college-name").textContent =
@@ -816,9 +823,10 @@
           });
 
           // Page content
-          const data = await fetch(`config/pages/${pageId}.json`).then((r) =>
-            r.json(),
-          );
+          const data = await fetch(`config/pages/${pageId}.json`).then((r) => {
+            if (!r.ok) throw new Error(r.status);
+            return r.json();
+          });
           document.title = `${data.title} | Bansur P.G. College`;
           document.getElementById("hero-title").textContent = data.title;
           document.getElementById("breadcrumb-title").textContent = data.title;
